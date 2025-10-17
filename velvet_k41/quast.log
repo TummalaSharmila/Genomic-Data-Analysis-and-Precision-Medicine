@@ -1,0 +1,65 @@
+/N/u/shatumma/Quartz/.conda/envs/Assignment1/bin/quast.py assemblies/velvet_k41/contigs.fa -o quast_results/velvet_k41 --min-contig 200 --threads 8
+
+Version: 5.2.0
+
+System information:
+  OS: Linux-4.18.0-553.78.1.el8_10.x86_64-x86_64-with-glibc2.28 (linux_64)
+  Python version: 3.14.0
+  CPUs number: 44
+
+Started: 2025-10-15 19:32:56
+
+Logging to /N/slate/shatumma/Precision_Medicine/Assignment1/quast_results/velvet_k41/quast.log
+
+CWD: /N/slate/shatumma/Precision_Medicine/Assignment1
+Main parameters: 
+  MODE: default, threads: 8, min contig length: 200, min alignment length: 65, min alignment IDY: 95.0, \
+  ambiguity: one, min local misassembly length: 200, min extensive misassembly length: 1000
+
+Contigs:
+  Pre-processing...
+  assemblies/velvet_k41/contigs.fa ==> contigs
+
+2025-10-15 19:32:59
+Running Basic statistics processor...
+  Contig files: 
+    contigs
+  Calculating N50 and L50...
+    contigs, N50 = 212, L50 = 47, auN = 215.5, Total length = 20844, GC % = 51.25, # N's per 100 kbp =  0.00
+  Drawing Nx plot...
+    saved to /N/slate/shatumma/Precision_Medicine/Assignment1/quast_results/velvet_k41/basic_stats/Nx_plot.pdf
+  Drawing cumulative plot...
+    saved to /N/slate/shatumma/Precision_Medicine/Assignment1/quast_results/velvet_k41/basic_stats/cumulative_plot.pdf
+  Drawing GC content plot...
+    saved to /N/slate/shatumma/Precision_Medicine/Assignment1/quast_results/velvet_k41/basic_stats/GC_content_plot.pdf
+  Drawing contigs GC content plot...
+    saved to /N/slate/shatumma/Precision_Medicine/Assignment1/quast_results/velvet_k41/basic_stats/contigs_GC_content_plot.pdf
+  Drawing Coverage histogram (bin size: 1x)...
+    saved to /N/slate/shatumma/Precision_Medicine/Assignment1/quast_results/velvet_k41/basic_stats/coverage_histogram.pdf
+  Drawing contigs coverage histogram (bin size: 1x)...
+    saved to /N/slate/shatumma/Precision_Medicine/Assignment1/quast_results/velvet_k41/basic_stats/contigs_coverage_histogram.pdf
+Done.
+
+NOTICE: Genes are not predicted by default. Use --gene-finding or --glimmer option to enable it.
+
+2025-10-15 19:33:01
+Creating large visual summaries...
+This may take a while: press Ctrl-C to skip this step..
+  1 of 2: Creating PDF with all tables and plots...
+  2 of 2: Creating Icarus viewers...
+Done
+
+2025-10-15 19:33:01
+RESULTS:
+  Text versions of total report are saved to /N/slate/shatumma/Precision_Medicine/Assignment1/quast_results/velvet_k41/report.txt, report.tsv, and report.tex
+  Text versions of transposed total report are saved to /N/slate/shatumma/Precision_Medicine/Assignment1/quast_results/velvet_k41/transposed_report.txt, transposed_report.tsv, and transposed_report.tex
+  HTML version (interactive tables and plots) is saved to /N/slate/shatumma/Precision_Medicine/Assignment1/quast_results/velvet_k41/report.html
+  PDF version (tables and plots) is saved to /N/slate/shatumma/Precision_Medicine/Assignment1/quast_results/velvet_k41/report.pdf
+  Icarus (contig browser) is saved to /N/slate/shatumma/Precision_Medicine/Assignment1/quast_results/velvet_k41/icarus.html
+  Log is saved to /N/slate/shatumma/Precision_Medicine/Assignment1/quast_results/velvet_k41/quast.log
+
+Finished: 2025-10-15 19:33:01
+Elapsed time: 0:00:04.715740
+NOTICEs: 1; WARNINGs: 0; non-fatal ERRORs: 0
+
+Thank you for using QUAST!
