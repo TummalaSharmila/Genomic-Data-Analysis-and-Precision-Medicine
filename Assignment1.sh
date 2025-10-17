@@ -40,14 +40,6 @@ done
 #quast
 mkdir -p quast_results
 
-for k in 31 41 51 61 71
-do
-    echo "Running QUAST for Velvet k=$k..."
-    quast.py assemblies/velvet_k${k}/contigs.fa \
-        -o quast_results/velvet_k${k} \
-        --min-contig 200 --threads 8
-done
-
 for k in 31 41 51 61 71; do     
 echo "Running QUAST for Velvet k=$k...";     
 quast.py assemblies/velvet_k${k}/contigs.fa         
