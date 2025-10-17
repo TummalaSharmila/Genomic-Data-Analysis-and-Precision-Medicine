@@ -1,7 +1,7 @@
 ###create environment
 conda create --name Assignment1
 conda activate Assignment1
-conda install -c bioconda:: velvet sra-toolkit oasis fastqc quast
+conda install -c bioconda:: velvet oasis
 mkdir Assignment1
 cd Assignment1
 
