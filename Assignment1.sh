@@ -37,20 +37,20 @@ oases .;
 cd ../../; 
 done
 
-#quast
+#quast for velvet assemblies
 mkdir -p quast_results
 
-for k in 31 41 51 61 71; do     
-echo "Running QUAST for Velvet k=$k...";     
-quast.py assemblies/velvet_k${k}/contigs.fa         
--o quast_results/velvet_k${k}         
---min-contig 200 --threads 8; 
+for k in 31 41 51 61 71
+do
+    echo "Running QUAST for Velvet k=$k..."
+    quast.py assemblies/velvet_k${k}/contigs.fa \
+        -o quast_results/velvet_k${k} \
+        --min-contig 200 --threads 8
 done
 
-mkdir -p quast_results
-for k in 31 41 51 61 71; do     
-quast.py assemblies/oases_k${k}/transcripts.fa -o quast_results/oases_k${k} --min-contig 200 --threads 8; 
+#quast for oases assemblies
+
+for k in 31 41 51 61 71
+do
+    quast.py assemblies/oases_k${k}/transcripts.fa -o quast_results/oases_k${k} --min-contig 200 --threads 8
 done
-
-
-
