@@ -1,0 +1,83 @@
+# Create environment
+module load conda
+
+conda create -n A2
+module load sra-toolkit   #v3.0.5
+
+mkdir -p SRR data/fastq
+
+## loading all the given data file's accession numbers in a .txt file
+cat > SraAccList.txt <<EOF
+SRR22269883
+SRR22269882
+SRR22269881
+SRR22269880
+SRR22269879
+SRR22269878
+SRR22269877
+SRR22269876
+SRR22269875
+SRR22269874
+SRR22269873
+SRR22269872
+EOF
+
+# Download SRA files
+prefetch --option-file SraAccList.txt -O SRR/
+
+# Convert to fastq
+for acc in $(cat SraAccList.txt); do
+  fasterq-dump $acc -O data/fastq --threads 8
+done
+
+
+# Quality Control
+module load fastqc   #v0.12.1
+
+mkdir -p qc
+fastqc data/fastq/*.fastq -o qc
+
+pip install cutadapt #v4.9
+module load trimgalore #v0.6.10
+
+mkdir -p trimming
+for fq in data/fastq/*.fastq; do
+  trim_galore -q 35  --length 20 --phred33 --fastqc "$fq" -o trimming
+done
+
+
+# Reference Setup
+
+mkdir -p reference
+cd reference
+wget https://ftp.ensembl.org/pub/current_fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.toplevel.fa.gz   #release 115 latest one from ensembl
+gunzip Homo_sapiens.GRCh38.dna.toplevel.fa.gz
+
+cd ..
+
+module load hisat #v2.2.1
+mkdir -p hg38_115
+# Building the index
+hisat2-build reference/Homo_sapiens.GRCh38.dna.toplevel.fa hg38_115
+
+mkdir -p alignments
+for fq in trimming/*_trimmed.fq.gz; do   base=$(basename "$fq" _trimmed.fq.gz);   hisat2 -p 8 --dta -x reference/hg38_ensembl_index -U "$fq" -S alignments/"${base}.sam"; done
+
+hisat2 -x hg38_115 -U reads.${SRA_Acession} -S alignment/"${SRA_Accession}.sam" --no-spliced-alignment
+
+module load samtools #v1.17
+for samfile in alignments/*.sam; do   base=$(basename "$samfile" .sam);   samtools view -@ 4 -bS "$samfile" > alignments/"$base".bam;   samtools sort -@ 4 -o alignments/"$base".sorted.bam alignments/"$base".bam;   samtools index alignments/"$base".sorted.bam; done
+
+# Quantification
+cd reference 
+wget https://ftp.ensembl.org/pub/current_gtf/homo_sapiens/Homo_sapiens.GRCh38.115.chr.gtf.gz #release 115
+gunzip Homo_sapiens.GRCh38.115.chr.gtf.gz
+
+cd ..
+
+module load subread
+
+featureCounts -a Homo_sapiens.GRCh38.115.chr.gtf -o gene_counts.txt alignments/*.sorted.bam
+
+
+
