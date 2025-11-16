@@ -100,3 +100,27 @@ I am uploading the .R file indicating all the steps done there
 
 
 # Interpretation of Differential Expression Results
+
+## Mock vs SARS-CoV-2
+A total of 60 genes were significantly differentially expressed between mock and SARS-CoV-2 infected cells (all time points combined).
+
+Of these, 43 genes were upregulated (higher expression in SARS-CoV-2) and 17 genes were downregulated (lower expression in SARS-CoV-2).
+
+The mean log2 fold change was 1.12 and the median was 1.87, indicating that, on average, gene expression is increased in SARS-CoV-2 infected cells compared to mock.
+
+The adjusted p-values (min: 2.8×10⁻⁶, max: 0.045) confirm the statistical significance of these changes.
+
+## SARS-CoV-2 24H vs 72H
+Within SARS-CoV-2 infected cells, 22 genes were significantly differentially expressed between 24 hours and 72 hours post-infection.
+
+Of these, 10 genes were upregulated (higher expression at 24H) and 12 genes were downregulated (lower expression at 24H).
+
+The mean log2 fold change was 0.03 and the median was -1.41, indicating that, on average, gene expression is slightly decreased at 24H compared to 72H.
+
+The adjusted p-values (min: 1.3×10⁻¹², max: 0.037) confirm the statistical significance of these changes.
+
+## Biological Implication
+The comparison between mock and SARS-CoV-2 infected cells reveals a strong transcriptional response to infection, with a majority of genes being upregulated.
+
+The comparison between 24H and 72H in SARS-CoV-2 infected cells suggests a dynamic change in gene expression over time, with a slight trend toward decreased expression at the earlier time point.
+
