@@ -42,7 +42,7 @@ module load trimgalore #v0.6.10
 
 mkdir -p trimming
 for fq in data/fastq/*.fastq; do
-  trim_galore -q 35  --length 20 --phred33 --fastqc "$fq" -o trimming
+  trim_galore -q 30  --length 16 --phred33 --fastqc "$fq" -o trimming
 done
 
 
@@ -54,19 +54,22 @@ wget https://ftp.ensembl.org/pub/current_fasta/homo_sapiens/dna/Homo_sapiens.GRC
 gunzip Homo_sapiens.GRCh38.dna.toplevel.fa.gz
 
 cd ..
+module load star
+mkdir -p hg38_110
+#buidling index
+STAR --runMode genomeGenerate \
+     --genomeDir hg38_110 \
+     --genomeFastaFiles reference/Homo_sapiens.GRCh38.dna.toplevel.fa \
+     --runThreadN 4
 
-module load hisat #v2.2.1
-mkdir -p hg38_115
-# Building the index
-hisat2-build reference/Homo_sapiens.GRCh38.dna.toplevel.fa hg38_115
 
 mkdir -p alignments
-for fq in trimming/*_trimmed.fq.gz; do   base=$(basename "$fq" _trimmed.fq.gz);   hisat2 -p 8 --dta -x reference/hg38_ensembl_index -U "$fq" -S alignments/"${base}.sam"; done
 
-hisat2 -x hg38_115 -U reads.${SRA_Acession} -S alignment/"${SRA_Accession}.sam" --no-spliced-alignment
-
-module load samtools #v1.17
-for samfile in alignments/*.sam; do   base=$(basename "$samfile" .sam);   samtools view -@ 4 -bS "$samfile" > alignments/"$base".bam;   samtools sort -@ 4 -o alignments/"$base".sorted.bam alignments/"$base".bam;   samtools index alignments/"$base".sorted.bam; done
+STAR --genomeDir hg38_115 \
+     --readFilesIn ${SRA_Accession}.fastq \
+     --outFileNamePrefix alignments/"${SRA_Accession}." \
+     --outSAMtype BAM SortedByCoordinate \
+     --runThreadN 4
 
 # Quantification
 cd reference 
@@ -76,8 +79,11 @@ gunzip Homo_sapiens.GRCh38.115.chr.gtf.gz
 cd ..
 
 module load subread
-
+#run the below command for all the bam files to get counts.txt
 featureCounts -a Homo_sapiens.GRCh38.115.chr.gtf -o gene_counts.txt alignments/*.sorted.bam
+
+Manual combination of all txt in one csv in excel
+>open excel >data >get 
 
 
 
