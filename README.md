@@ -94,8 +94,8 @@ featureCounts -a Homo_sapiens.GRCh38.115.chr.gtf -o gene_counts.txt alignments/*
 # Extract gene counts of each SRA_Accession number and make a gene_counts.csv file 
 Manual combination of all txt in one csv in excel
 ->open excel ->data ->get data ->select the .txt files ->copy the counts for each SRA_Accession into a new csv with geneID column and get a complete gene_counts.csv containing all the SRA_Accession counts for the gene IDs
-submitting the gene_counts.csv with all the gene IDs and there counts in across each condition/sample in each of these two sets.
-
+submitting the **gene_counts.csv** with all the gene IDs and there counts in across each condition/sample in each of these two sets.
+The file contains the expression levels for all genes, and miRNAs are included and detectable by their gene ID.
 
 # Running R Script to Differential Expression Analysis of SARS-CoV-2 and Mock Infected Cells Across Time Points
 I am uploading the .R file indicating all the steps done there
