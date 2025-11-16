@@ -1,7 +1,7 @@
 # Genomic-Analysis-Assignment-2
 ## Author: Sharmila Tummala
 # Title: Differential Expression Analysis of SARS-CoV-2 and Mock Infected Cells Across Time Points
-# The goal of this assignment is to compare the gene expression of human respiratory cells infected with SARS-CoV-2 with mock (control) samples at two different time points (24 hours and 72 hours). Data collection and preprocessing, alignment, differential expression and enrichment analysis, and sample and condition annotation of expression data are the primary phases.
+The goal of this assignment is to compare the gene expression of human respiratory cells infected with SARS-CoV-2 with mock (control) samples at two different time points (24 hours and 72 hours). Data collection and preprocessing, alignment, differential expression and enrichment analysis, and sample and condition annotation of expression data are the primary phases.
 
 # Create environment
 module load conda #
