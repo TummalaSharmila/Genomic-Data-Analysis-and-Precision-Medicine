@@ -1,5 +1,10 @@
+# Genomic-Analysis-Assignment-2
+# Author: Sharmila Tummala
+# Title: Differential Expression Analysis of SARS-CoV-2 and Mock Infected Cells Across Time Points
+# The goal of this assignment is to compare the gene expression of human respiratory cells infected with SARS-CoV-2 with mock (control) samples at two different time points (24 hours and 72 hours). Data collection and preprocessing, alignment, differential expression and enrichment analysis, and sample and condition annotation of expression data are the primary phases.
+
 # Create environment
-module load conda
+module load conda #
 
 conda create -n A2
 module load sra-toolkit   #v3.0.5
@@ -54,24 +59,30 @@ wget https://ftp.ensembl.org/pub/current_fasta/homo_sapiens/dna/Homo_sapiens.GRC
 gunzip Homo_sapiens.GRCh38.dna.toplevel.fa.gz
 
 cd ..
-module load star
-mkdir -p hg38_110
+
+# Indexing
+
+module load star # v2.7.11a
+mkdir -p hg38_115
 #buidling index
 STAR --runMode genomeGenerate \
-     --genomeDir hg38_110 \
+     --genomeDir hg38_115 \
      --genomeFastaFiles reference/Homo_sapiens.GRCh38.dna.toplevel.fa \
      --runThreadN 4
 
+# Alignment
 
-mkdir -p alignments
+mkdir -p alignment
+SRA_accessions=("SRR22269883" "SRR22269882" "SRR22269881" "SRR22269880" "SRR22269879" "SRR22269878" "SRR22269877" "SRR22269876" "SRR22269875" "SRR22269874" "SRR22269873" "SRR22269872")
 
 STAR --genomeDir hg38_115 \
      --readFilesIn ${SRA_Accession}.fastq \
-     --outFileNamePrefix alignments/"${SRA_Accession}." \
+     --outFileNamePrefix alignment/"${SRA_Accession}." \
      --outSAMtype BAM SortedByCoordinate \
      --runThreadN 4
 
 # Quantification
+## Downloading .gtf file
 cd reference 
 wget https://ftp.ensembl.org/pub/current_gtf/homo_sapiens/Homo_sapiens.GRCh38.115.chr.gtf.gz #release 115
 gunzip Homo_sapiens.GRCh38.115.chr.gtf.gz
@@ -79,11 +90,16 @@ gunzip Homo_sapiens.GRCh38.115.chr.gtf.gz
 cd ..
 
 module load subread
-#run the below command for all the bam files to get counts.txt
+### run the below command for all the bam files to get counts.txt
 featureCounts -a Homo_sapiens.GRCh38.115.chr.gtf -o gene_counts.txt alignments/*.sorted.bam
 
+# Extract gene counts of each SRA_Accession number and make a gene_counts.csv file 
 Manual combination of all txt in one csv in excel
->open excel >data >get 
+>open excel >data >get data >select the .txt files >copy the counts for each SRA_Accession into a new csv with geneID column and get a complete gene_counts.csv containing all the SRA_Accession counts for the gene IDs
+
+# Running R Script to Differential Expression Analysis of SARS-CoV-2 and Mock Infected Cells Across Time Points
+I am uploading the .R file indicating all the steps done there
+
 
 
 
