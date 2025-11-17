@@ -104,6 +104,7 @@ I am uploading the .R file indicating all the steps done there
 # Interpretation of Differential Expression Results
 ## Mock vs SARS-CoV-2
 upregulated_gene_ids
+
  [1] "ENSG00000202031" "ENSG00000201321" "ENSG00000234741" "ENSG00000143226" "ENSG00000202400"
  [6] "ENSG00000265706" "ENSG00000202164" "ENSG00000222345" "ENSG00000199609" "ENSG00000202054"
 [11] "ENSG00000221500" "ENSG00000305361" "ENSG00000201772" "ENSG00000252316" "ENSG00000200852"
@@ -150,4 +151,4 @@ The adjusted p-values (min: 1.3×10⁻¹², max: 0.037) confirm the statistical 
 The comparison between mock and SARS-CoV-2 infected cells reveals a strong transcriptional response to infection, with a majority of genes being upregulated.
 
 The comparison between 24H and 72H in SARS-CoV-2 infected cells suggests a dynamic change in gene expression over time, with a slight trend toward decreased expression at the earlier time point.
-
+These results suggest that SARS-CoV-2 infection triggers a robust host transcriptional response, characterized by the upregulation of immune and inflammatory genes, which may reflect the activation of antiviral defenses. The dynamic changes in gene expression over time indicate a shifting host response, possibly reflecting viral replication cycles and adaptation. Such transcriptional profiles could serve as potential biomarkers for infection severity or progression and may inform the development of targeted therapies or diagnostic strategies for COVID-19.
